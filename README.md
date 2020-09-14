@@ -84,7 +84,7 @@ le destinaire renvoie alors `WTF "<explication>"` (**ERR**)
  - **QUIT** : `JPP`
  - **ERR** : `WTF <space> <string>`
  - **space** : `[ ]+`
- - **slash** : `\`
+ - **slash** : `/`
  - **name** : `<string>`
  - **string** : `" (<unicode-char>|"")* "`
  - **unicode-char** : n'importe quel caractère UNICODE
