@@ -36,7 +36,7 @@ Alice connait maintenant la liste de tous les participants (Bob, Carol et David)
 
 Alice envoie un message à chacun des autres participants (**MSG**). Le protocole étant décentralisé, il faut répliquer un même
 message à chaque personne.
-Chaque message doit être ensuite acknowledge par un `LOL` par chaque destinataure (**ACK**)
+Chaque message doit être ensuite acknowledge par un `LOL` par chaque destinataire (**ACK**)
 L'absence d'acknowlegdement pendant un laps de temps défini (TIMEOUT) clôt la connexion.
 
  - Alice (à Bob) : `TAVU "Bonjour messieurs dames, comment vous portez-vous ?"`
@@ -77,7 +77,7 @@ le destinaire renvoie alors `WTF "<explication>"` (**ERR**)
 
  - **INIT** : `KIKOO <space> <name> <space> <ASK>`
  - **ASK** : `ASV`
- - **IDENT** : `OKLM <space> <name> (<space> <slash> <space> <ip>)*`
+ - **IDENT** : `OKLM <space> <name> (<space> <slash> <space> <authority>)*`
  - **REJECT** : `TROPA`
  - **MSG** : `TAVU <space> <string>`
  - **ACK** : `LOL`
@@ -88,6 +88,10 @@ le destinaire renvoie alors `WTF "<explication>"` (**ERR**)
  - **name** : `<string>`
  - **string** : `" (<unicode-char>|"")* "`
  - **unicode-char** : n'importe quel caractère UNICODE
+ - **authority** : `<ip> <port>?`
  - **ip** : `<ip-part> <dot> <ip-part> <dot> <ip-part> <dot> <ip-part>`
+ - **port** : `<colon> <port-number>`
  - **dot** : `.`
  - **ip-part** : un entier de 0 à 127
+ - **colon** : `:`
+ - **port-number** : un entier de 0 à 65536
