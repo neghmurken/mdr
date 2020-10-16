@@ -5,17 +5,17 @@ Messages Décentralisées en Réseau
 MDR est un protocole de messagerie décentralisée très simple.
 
 Les exemples suivants montrent une situation où un participant (Alice) tente de rejoindre la conversation de Bob, Carol et David.
-Alice ne connait pour l'instant que l'adresse IP de Bob (128.0.0.1)
+Alice ne connait pour l'instant que l'adresse IP de Bob (128.0.0.1:40)
 
 ## Connexion ##
 
-Alice se connecte à 128.0.0.1 (avec son nom) et lui demande son identité (**INIT**)
+Alice se connecte à 128.0.0.1:40 (avec son nom et son addresse d'écoute) et lui demande son identité (**INIT**)
 
- - Alice (à 128.0.0.1) : `KIKOO "Alice" ASV`
+ - Alice (à 128.0.0.1) : `KIKOO "Alice" 128.0.0.4:40 ASV`
 
-128.0.0.1 accepte, renvoie son nom et la liste des autres participants (s'il y en a) (**IDENT**)
+128.0.0.1 accepte, renvoie son nom, son adresse d'écoute et la liste des autres participants (s'il y en a) (**IDENT**)
 
- - 128.0.0.1 (à Alice) : `OKLM "Bob" / 128.0.0.2 / 128.0.0.3`
+ - 128.0.0.1 (à Alice) : `OKLM "Bob" 128.0.0.1:40 / 128.0.0.2:40 / 128.0.0.3:40`
 
 Une connexion entre Alice et Bob est maintenant effective.
 
@@ -25,10 +25,10 @@ Une connexion entre Alice et Bob est maintenant effective.
 
 Alice se connecte à chaque autre participant si ce n'est pas déjà le cas.
 
- - Alice (à 128.0.0.2) : `KIKOO "Alice" ASV`
- - Alice (à 128.0.0.3) : `KIKOO "Alice" ASV`
- - 128.0.0.2 (à Alice) : `OKLM "Carol" / 128.0.0.1 / 128.0.0.3`
- - 128.0.0.3 (à Alice) : `OKLM "David" / 128.0.0.1 / 128.0.0.2`
+ - Alice (à 128.0.0.2) : `KIKOO "Alice" 128.0.0.4:40 ASV`
+ - Alice (à 128.0.0.3) : `KIKOO "Alice" 128.0.0.4:40 ASV`
+ - 128.0.0.2 (à Alice) : `OKLM "Carol" 128.0.0.2:40 / 128.0.0.1:40 / 128.0.0.3:40`
+ - 128.0.0.3 (à Alice) : `OKLM "David" 128.0.0.3:40 / 128.0.0.1:40 / 128.0.0.2:40`
 
 Alice connait maintenant la liste de tous les participants (Bob, Carol et David)
 
@@ -75,9 +75,9 @@ le destinaire renvoie alors `WTF "<explication>"` (**ERR**)
 
 ## Référence ##
 
- - **INIT** : `KIKOO <space> <name> <space> <ASK>`
+ - **INIT** : `KIKOO <space> <name> <space> <authority> <space> <ASK>`
  - **ASK** : `ASV`
- - **IDENT** : `OKLM <space> <name> (<space> <slash> <space> <authority>)*`
+ - **IDENT** : `OKLM <space> <name> <space> <authority> (<space> <slash> <space> <authority>)*`
  - **REJECT** : `TROPA`
  - **MSG** : `TAVU <space> <string>`
  - **ACK** : `LOL`
@@ -94,4 +94,4 @@ le destinaire renvoie alors `WTF "<explication>"` (**ERR**)
  - **dot** : `.`
  - **ip-part** : un entier de 0 à 127
  - **colon** : `:`
- - **port-number** : un entier de 0 à 65536
+ - **port-number** : un entier de 0 à 65535
